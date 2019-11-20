@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <script>
+    var myVar;
+    function myStartFunction() {
+      myVar = setTimeout(
+        alertFunc,
+        2000,
+        "First parameter",
+        "Second parameter"
+      );
+    }
+    function alertFunc(param1, param2) {
+      document.getElementById("demo").innerHTML += "Hello ";
+      document.getElementById("demo2").innerHTML =
+        "Parameters passed to alertFunc(): <br>" +
+        param1 +
+        "<br>" +
+        param2 +
+        "<br>";
+    }
+  </script>
+  <body>
+    <h1>Call Backs</h1>
+    <button onclick="myStartFunction()">Start</button>
+    <p id="demo"></p>
+    <p id="demo2" style="color:red;"></p>
+  </body>
+  <script src="callbacks.js"></script>
+</html>
