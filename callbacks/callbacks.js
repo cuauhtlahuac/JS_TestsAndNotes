@@ -1,31 +1,32 @@
 function saludar(name, callback, secondCallback) {
-    // llamar algo que no existe, aquí se llama la función
-    console.log("Antes de callback");
-    callback(name);
-    console.log("después de callback");
-    secondCallback(name)
-    console.log("after 2nd callback name: " + name);
+  // llamar algo que no existe, aquí se llama la función
+  console.log("Antes de callback");
+  callback(name);
+  console.log("después de callback");
+  secondCallback(name);
+  console.log("after 2nd callback name: " + name);
 }
 
 function saludo(name) {
-    function myFunc(num) {
-        if (num <= 0) {
-            return console.log("finished")
-        }
-        console.log("Que show " + name + " | . _ . |")
-        myFunc(num - 1)
+  function myFunc(num) {
+    if (num <= 0) {
+      return console.log("finished");
     }
-    return myFunc(100)
+    console.log("Que show " + name + " | . _ . |");
+    myFunc(num - 1);
+  }
+  return myFunc(100);
 }
-saludar("Yeyo Arris", // Aquí solo estamos pasando la definición de la función
-saludo, function(name) {
-    console.log("|> 1rst Good bye " + name + " ( * _ * )");
-    var setTime = setTimeout(function() {
-        console.log("|>setTimeOut Good bye " + name + " ( * _ * )");
+saludar(
+  "Yeyo Arris", // Aquí solo estamos pasando la definición de la función
+  saludo,
+  function(name) {
+    // set time out no funciona para callbacks
+    return setTimeout(function() {
+      console.log("|>setTimeOut Good bye " + name + " ( * _ * )");
     }, 2000);
-    console.log("|> last Good bye " + name + " ( * _ * )");
-    return setTime
-});
+  }
+);
 
 //STACK: 1.- Callback 2.-
 
