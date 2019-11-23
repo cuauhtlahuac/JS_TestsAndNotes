@@ -1,31 +1,56 @@
+const items = [ 1, 2, 3, 4 ];
+window.addEventListener('load', () => {
+	// se ejecuta al principio, cuando se carga la ventana
+	console.log('window_load');
+	document.getElementById('button').addEventListener('click', () => {
+		// Se ejecuta al momento de presionar el button
+		console.log('buton-pressed');
+		setTimeout(() => {
+			items.forEach((item) => {
+				//your code here
+				console.log('waiting ' + item);
+			});
+			saludar(
+				'Ya casi acabamos los callbacks',
+				() => {
+					console.log('penultimo');
+				},
+				() => {
+					console.log('Ultimo');
+				}
+			);
+		}, 2000);
+	});
+});
+
 function saludar(name, callback, secondCallback) {
-  // llamar algo que no existe, aquí se llama la función
-  console.log("Antes de callback");
-  callback(name);
-  console.log("después de callback");
-  secondCallback(name);
-  console.log("after 2nd callback name: " + name);
+	// llamar algo que no existe, aquí se llama la función
+	console.log('Antes de callback');
+	callback(name);
+	console.log('después de callback');
+	secondCallback(name);
+	console.log('after 2nd callback name: ' + name);
 }
 
 function saludo(name) {
-  function myFunc(num) {
-    if (num <= 0) {
-      return console.log("finished");
-    }
-    console.log("Que show " + name + " | . _ . |");
-    myFunc(num - 1);
-  }
-  return myFunc(100);
+	function myFunc(num) {
+		if (num <= 0) {
+			return console.log('finished');
+		}
+		console.log('Que show ' + name + ' | . _ . |');
+		myFunc(num - 1);
+	}
+	return myFunc(100);
 }
 saludar(
-  "Yeyo Arris", // Aquí solo estamos pasando la definición de la función
-  saludo,
-  function(name) {
-    // set time out no funciona para callbacks
-    return setTimeout(function() {
-      console.log("|>setTimeOut Good bye " + name + " ( * _ * )");
-    }, 2000);
-  }
+	'Yeyo Arris', // Aquí solo estamos pasando la definición de la función
+	saludo,
+	function(name) {
+		// set time out no funciona para callbacks
+		return setTimeout(function() {
+			console.log('|>setTimeOut Good bye ' + name + ' ( * _ * )');
+		}, 2000);
+	}
 );
 
 //STACK: 1.- Callback 2.-
