@@ -7,3 +7,4 @@ Es una función que se ejecuta después de que la función que la llama es llama
 
 por ejemplo foreach, ejecuta algo por cada item de un arreglo, se le pasa como parámetro una función.
 
+[How to return results asyncronous functions](https://flaviocopes.com/how-to-return-result-asynchronous-function/)
