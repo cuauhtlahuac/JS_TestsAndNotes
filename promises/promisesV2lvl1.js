@@ -3,7 +3,7 @@
 // with two parameters, resolve and reject
 let p = new Promise((resolve, reject) => {
 	let a = 1 + 1;
-	if (a == 3) {
+	if (a == 2) {
 		// you can pass anything that you want
 		resolve('Success ' + a);
 	} else {
@@ -17,6 +17,10 @@ p
 	// in our case will be the resolve parameter with string Success, we call message.
 	.then((message) => {
 		console.log('this is in the then', message);
+		return 'otra cosa';
+	})
+	.then((message) => {
+		console.log('other thing = ' + message);
 	})
 	// this will catch the error and passing the reject data in the parameter
 	.catch((fail) => {
