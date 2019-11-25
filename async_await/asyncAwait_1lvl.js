@@ -17,14 +17,31 @@ function processRequest(response) {
 	});
 }
 // Using Promises
-makeRequest('Google')
-	.then((response) => {
+// makeRequest('Google')
+// 	.then((response) => {
+// 		console.log('Response Received');
+// 		return processRequest(response);
+// 	})
+// 	.then((processedResponse) => {
+// 		console.log(processedResponse);
+// 	})
+// 	.catch((err) => {
+// 		console.log(err);
+// 	});
+
+// Using Async Await
+// first we create a function with keyword async
+async function doWork() {
+	// Use try catch to handle errors
+	try {
+		const response = await makeRequest('Google');
 		console.log('Response Received');
-		return processRequest(response);
-	})
-	.then((processedResponse) => {
-		console.log(processedResponse);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+		const processResponse = await processRequest(response);
+		console.log({ processResponse });
+	} catch (e) {
+		console.log('error: ' + e);
+	}
+	// Await says: the code await until the function has finish,
+	// after work execute the next thing
+}
+doWork();
