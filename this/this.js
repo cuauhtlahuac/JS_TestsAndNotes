@@ -1,36 +1,31 @@
 /*
-This es el objeto de javascript en el cual se está ejecutando el código actual
 This sólo existe., no se puede declarar como una variable o algo parecido
 */
-
-// This se inicializa en el contexto que s le llame, en este caso es un objeto vacío
+// El contexto de node.js  this es un objeto vacío
+// En el contexto del navegador this es window
 console.log('Esto es this =>', this);
+this.newProp = 'Agregué una propiedad a this';
+console.log('Ahora esto es this:' + this);
 
-// Al asinarle un valor a this, se guarda y se creó una ueva propiedad en el objeto this.
-this.newProp = 'Una nueva prop para this';
-console.log(this);
-
-// Aquí encapsulamos cosas en un objeto, y por esa razón creamos un nuevo contexto
+// Al crear un objeto encapsulamos cosas, y por ende creamos un nuevo contexto
 const playa = {
 	palmeras: 50,
-	countPalmeras: function() {
+	countPalmeras: function () {
 		return (
-			'en la playa hay ' +
-			this.palmeras +
-			// la línea debajo es otra forma de llamar a el número palmeras
-			' tambien en la playa hay  ' +
-			playa.palmeras +
+			'en la playa hay ' + this.palmeras + ' palmeras / otra forma de llamar a palmeras es: ' + playa.palmeras
 		);
 	}
 };
-console.log({ playa });
-
+console.log("Primer vistazo de playa.CountPalmeras")
 console.log(playa.countPalmeras());
-const countPalmeras = playa.countPalmeras;
-console.log({ countPalmeras });
-// Este me va a arrojar un undefine en this.palmeras, porque el contexto del objeto cambió
-console.log(countPalmeras());
-// Para arreglar esto, JS tiene tres metodos
+console.log("----------------")
+// Asignamos playa.countPalmeras a una variable solo para cambiar el contexto de this
+const countPalmerasReasigned = playa.countPalmeras;
+// Al cambiar su contexto me va a arrojar un undefine en this.palmeras.
+console.log("Segundo vistazo de playa.CountPalmeras cambiand contexto")
+console.log(countPalmerasReasigned());
+console.log("----------------")
+// Para arreglar esto, JS Primer tres metodos
 /*
 bind
 call
@@ -38,11 +33,32 @@ apply
 */ß
 
 // Con Bind tienes que pasarle el contexto como parametro
-// se guarda en una variable para poder ejecutar
+//  se guarda en una variable porque no se puede ejecutar directo
+// ya que se crea una nueva función
+const countPalmerasConBind = countPalmerasReasigned.bind(playa);
+console.log("Tercer vistazo de playa.CountPalmeras bindiando el contexto")
+console.log('Con Bind =>', countPalmerasConBind());
+console.log("----------------")
+// como nota, le puedes pasar otros objetos a bind, cambiar el contexto y obtener otro dato
+const playaAcapulco = {
+	palmeras: 71
+}
+const countPalmerasAcapulcoConBind = countPalmerasReasigned.bind(playaAcapulco);
+console.log('Acapulco Bind : ', countPalmerasAcapulcoConBind())
 
-const countBindeado = countPalmeras.bind(playa);
-console.log('Con Bind =>', countBindeado());
-// Con metodo Call evitamos guardar la funcion en una variable para despues ejecutarla
-// Funciona pasandole como primer parametro el contexto y como segundo los parametros de la funcion
-// En este caso funciona nuevamente porque no tenemos parametros que pasarle
-console.log('Con Call=>', countPalmeras.call(playa, null));
+console.log("Cuarto vistazo de playa.CountPalmeras con call")
+// Call se eecuta en ese mismo momento, no hay necesidad de guardar en variable
+// Call recibe como primer parametro el contexto, 
+// como segundo parámetro los parametros de mi funcion
+console.log('Con Call=>', countPalmerasReasigned.call(playa, null));
+// en este ejemplo pasamos null, porque no requerímos parametros
+
+// Apply es igual que call pero como segundo parámetro
+// se le pasan los parametros de la función bindeada como array 
+
+
+
+
+
+return null
+
